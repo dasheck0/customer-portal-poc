@@ -1,0 +1,25 @@
+<h1>List of all projects</h1>
+
+
+    <table>
+      <thead>
+        <td>
+          Title
+        </td>
+      <td>
+        Description
+      </td>
+      </thead>
+      <tbody>
+      <tr>
+        <% for project in @projects %>
+            <td><%= project.title %></td>
+            <td><%= project.description %></td>
+        <% end %>
+      </tr>
+        </tbody>
+    </table>
+
+<h1>Create a new one</h1>
+<%= link_to "Click", new_project_path %>
+
