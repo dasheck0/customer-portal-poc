@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: CustomerPortalPOC_development
   pool: 5
-  username: root
-  password:
+  username: custom
+  password: 12345678
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -27,8 +27,8 @@ test:
   reconnect: false
   database: CustomerPortalPOC_test
   pool: 5
-  username: root
-  password:
+  username: custom
+  password: 12345678
   host: localhost
 
 production:
