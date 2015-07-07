@@ -1,24 +1,32 @@
 <h1>List of all projects</h1>
 
 
-    <table>
-      <thead>
-        <td>
-          Title
-        </td>
-      <td>
-        Description
-      </td>
-      </thead>
-      <tbody>
+<table>
+  <thead>
+  <td>
+    <b> Title </b>
+  </td>
+  <td>
+    <b>Description</b>
+  </td>
+  <td></td>
+  </thead>
+  <tbody>
+  <% for project in @projects %>
       <tr>
-        <% for project in @projects %>
-            <td><%= project.title %></td>
-            <td><%= project.description %></td>
-        <% end %>
+        <td><%= project.title %></td>
+        <td><%= project.description %></td>
+        <td>
+          <% unless current_user.nil? %>
+              <% if current_user.admin? || current_user.project_manager? %>
+                  <%= link_to 'Delete', project_path(project), :method => :delete, :confirm => 'Are you sure?' %>
+              <% end %>
+          <% end %>
+        </td>
       </tr>
-        </tbody>
-    </table>
+  <% end %>
+  </tbody>
+</table>
 
 <h1>Create a new one</h1>
 <%= link_to "Click", new_project_path %>

@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+  #before_filter :assert_project_manager_rights, :except => [:index, :show]
+
   def index
     @projects = Project.all
   end
@@ -9,7 +11,17 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    unless current_user.nil?
+      if current_user.admin? || current_user.project_manager?
+        project = Project.new(params[:project])
 
+        if project.valid?
+          project.save!
+        end
+      end
+    end
+
+    redirect_to projects_path
   end
 
   def show
@@ -25,7 +37,14 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    unless current_user.nil?
+      if current_user.admin? || current_user.project_manager?
+        id = params[:id]
+        Project.destroy(id)
+      end
+    end
 
+    redirect_to projects_path
   end
 
 end
